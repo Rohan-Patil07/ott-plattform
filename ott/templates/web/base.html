@@ -1,0 +1,226 @@
+{% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="../../static/css/style.css" />
+    <script src="/static/js/logout.js"></script>
+
+    <title>Movies</title>
+    <style>
+        .scrolling-wrapper {
+            padding: 1rem 0;
+            margin: 0 1.5rem;
+
+            overflow-x: scroll;
+            overflow-y: hidden;
+            white-space: nowrap;
+        }
+
+        .card {
+        display: inline-block;
+         margin: 10px;
+        }
+    </style>
+    <script src="../../static/js/script.js" defer></script>
+</head>
+
+<body>
+    <header class="p-3 bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-2 d-flex justify-content-start">
+                    <a href="/home/" class="
+                        d-flex
+                        align-items-center
+                        mb-2 mb-lg-0
+                         text-decoration-none
+                      " style="font-size: large; color: #fe1495;"><img src="../../static/media/video-file-48.ico"
+                            alt="logo">&nbsp; Blah..
+                    </a>
+
+                </div>
+                <div class="col-6 d-flex justify-content-between">
+                    <form class="col-11">
+                        <input type="search" class="form-control form-control-dark" placeholder="Search..."
+                            aria-label="Search" />
+
+                    </form>
+                    <button type="button" class="btn btn-outline-secondary" style="height: 41px !important;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
+                            </path>
+                        </svg>
+                        <span class="visually-hidden">Button</span>
+                    </button>
+
+                </div>
+                <div class="col-4">
+                    {% if 'Email' in request.session %}
+                    <div class="d-flex justify-content-end">
+                        <a href="/settings/"><img src="../../static/media/gear-24.png" alt="settings" width="38px"
+                                height="38px" /></a>&nbsp;&nbsp;
+                        <a href="/myprofile/"><img src="../../static/media/myprofile.png" alt="myprofile" width="38px"
+                                height="38px" /></a>
+                    </div>
+
+                    {% else %}
+                    <div class="d-flex justify-content-end"><a href="/login/"><button type="button"
+                                class="btn btn-outline-light">Login</button></a>&nbsp;
+                        <a href="/register/"><button type="button"
+                                class="btn btn-warning">Sign-up</button></a>&nbsp;&nbsp;
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted">
+        <!-- Section: Social media -->
+        <section class="
+          d-flex
+          justify-content-center justify-content-lg-between
+          p-4
+          border-bottom
+        ">
+            <!-- Left -->
+            <div class="me-5 d-none d-lg-block">
+                <span>Get connected with us on social networks:</span>
+            </div>
+            <!-- Left -->
+
+            <!-- Right -->
+            <div>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-facebook"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-twitter"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-google"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-github"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3"></i>Company name
+                        </h6>
+                        <p>
+                            Here you can use rows and columns to organize your footer
+                            content. Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Products</h6>
+                        <p>
+                            <a href="/home/" class="text-reset">Movies</a>
+                        </p>
+                        <p>
+                            <a href="/series/" class="text-reset">Series</a>
+                        </p>
+                        <p>
+                            <a href="/songs/" class="text-reset">Songs</a>
+                        </p>
+                        <p>
+                            <a href="/videos/" class="text-reset">Videos</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
+                        <p>
+                            <a href="/buy/" class="text-reset">Pricing</a>
+                        </p>
+                        <p>
+                            <a href="/settings/" class="text-reset">Settings</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Orders</a>
+                        </p>
+                        <p>
+                            <a href="/settings/" class="text-reset">Help</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <p><i class="bi bi-house-fill"></i> Belagavi, KA, India</p>
+                        <p>
+                            <i class="bi bi-envelope-fill"></i>
+                            info@example.com
+                        </p>
+                        <p><i class="bi bi-telephone-fill"></i> + 01 234 567 88</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05)">
+            © 2021 Copyright:
+            <a class="text-reset fw-bold" href="https://mdbootstrap.com/">Blah.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+
+</html>
