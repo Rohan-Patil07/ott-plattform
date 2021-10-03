@@ -21,6 +21,7 @@ function getVideos(){
           $("#video_title").html(response[0].v_title)
           $("#desc").text(response[0].v_desc)
           $('#Genre').text("Genre : " + response[0].v_cat)
+          $('#channel_name').text(response[0].v_channel_name)
         }
         
         });

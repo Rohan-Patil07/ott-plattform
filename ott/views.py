@@ -51,22 +51,9 @@ def videosPage(request):
 
 def settingsPage(request):
     jsonData = User.objects.filter(
-        user_email=request.session["Email"]).values()
+    user_email=request.session["Email"]).values()
     data = (jsonData)
-    print(type(data))
-    print(data)
     articles_list = list(data)
-    print(articles_list)
-    print(type(articles_list[0]))
-    # dictValues = {
-    #     "name":"Akshata",
-    #     "mobile":"99999999",
-    # }
-    # listValue=articles_list[0]
-    # request.session["Email"]=listValue["user_email"]
-    # User.objects.filter(user_un=request.session["Email"]).update("user_un")
-    # User.objects.filter(user_name=request.session["Email"]).update("user_name")
-    # User.objects.filter(user_un=request.session["Email"]).update("user_email" )
     return render(request, 'web/settings.html', articles_list[0])
 
 
@@ -75,7 +62,11 @@ def view1page(request):
 
 
 def mychannel(request):
-    return render(request, 'web/mychannel.html')
+    jsonData = User.objects.filter(
+    user_email=request.session["Email"]).values()
+    data = (jsonData)
+    articles_list = list(data)
+    return render(request, 'web/mychannel.html', articles_list[0])
 
 
 def Channel_Content(request):
@@ -155,7 +146,7 @@ def userReg(request):
             user_phone=request.POST['phoneno'],
             user_pw=request.POST['password'],
             user_status="0",
-            user_ChannelName=""
+            user_ChannelName=request.POST["name"]
         )
         return HttpResponse("1")
 
@@ -166,6 +157,7 @@ def userLogin(request):
         data = list(jsonData)
         listValue = data[0]
         request.session['Email'] = listValue['user_email']
+        request.session['channel_name'] = listValue['user_ChannelName']
         print(request.session)
         return HttpResponse("11")
 
@@ -211,6 +203,7 @@ def userVideo(request):
         v_views=0,
         v_likes=0,
         v_wh=0,
+        v_channel_name = request.session['channel_name'],
         v_image= request.FILES['imagee'],
         v_video= request.FILES['videoo'],
         v_status="0"
@@ -221,12 +214,27 @@ def getVideos(request):
     json_object = videos.objects.values()
     data = list(json_object)
     value=JsonResponse(data,safe=False)
+
     return value
 
-def getViewVideos(request):
+def getSongs(request):
+    json_object = videos.objects.values()
+    data = list(json_object)
+    value=JsonResponse(data,safe=False)
+
+    return value
+
+def getViewVideos(request): 
     json_object = videos.objects.filter(v_id=request.POST["txtID"]).values()
     data = list(json_object)
     value=JsonResponse(data,safe=False)
+    listValue = data[0]
+
+    videos.objects.filter(v_id=request.POST["txtID"]).update(v_views=listValue['v_views']+1);
     return value
 
-    
+def order(request):
+    User.objects.filter(user_email=request.session['Email']).update(
+        user_status=1
+    )
+    return HttpResponse()

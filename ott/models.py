@@ -55,4 +55,5 @@ class videos(models.Model):
     v_wh = models.IntegerField()
     v_image = models.ImageField(upload_to="ott/static/media/uvideo_thumbnail")
     v_video = models.FileField(upload_to="ott/static/media/user_videos")
+    v_channel_name=models.CharField(max_length=100)
     v_status = models.CharField(max_length=8)

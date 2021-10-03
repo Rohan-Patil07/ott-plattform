@@ -54,6 +54,8 @@ urlpatterns = [
     path('adminuploadform/',views.adminuploadform),
     path('user_videos/',views.userVideo),
     path('get_videos/',views.getVideos),
-    path('get_view_videos/',views.getViewVideos)
+    path('get_songs/',views.getSongs),
+    path('get_view_videos/',views.getViewVideos),
+    path('pay_success/',views.order),
 
 ]
